@@ -81,7 +81,12 @@
 
       <button type="submit">PREDICT</button>
     </form>
-
+    {% if error %}
+    <section class="result error">
+       <span class="result-label">Error</span>
+       <h2>{{ error }}</h2>
+    </section>
+    {% endif %}
     {% if prediction %}
     <section class="result">
       <span class="result-label">Verdict</span>
