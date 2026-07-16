@@ -1,0 +1,213 @@
+* { box-sizing: border-box; }
+
+:root {
+  --night: #0B1F17;
+  --pitch: #123524;
+  --pitch-light: #1A4A31;
+  --amber: #FFB627;
+  --chalk: #F4F1E8;
+  --live: #3ADB76;
+  --shadow: #081310;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #16382A 0%, var(--night) 60%);
+  font-family: 'Barlow Condensed', sans-serif;
+  color: var(--chalk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.floodlights {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% -10%, rgba(255,182,39,0.10), transparent 40%),
+    radial-gradient(circle at 90% -10%, rgba(255,182,39,0.10), transparent 40%);
+  pointer-events: none;
+}
+
+.board {
+  width: 100%;
+  max-width: 460px;
+}
+
+.board-frame {
+  background: var(--pitch);
+  border: 1px solid rgba(255,182,39,0.25);
+  border-radius: 14px;
+  padding: 28px 26px 32px;
+  box-shadow:
+    0 0 0 6px var(--shadow),
+    0 20px 50px rgba(0,0,0,0.5),
+    inset 0 0 40px rgba(255,182,39,0.04);
+  position: relative;
+}
+
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.board-header .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 8px var(--live);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+h1 {
+  font-family: 'Space Mono', monospace;
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: var(--amber);
+  text-shadow: 0 0 12px rgba(255,182,39,0.5);
+  margin: 6px 0;
+  text-align: center;
+}
+
+.byline {
+  text-align: center;
+  font-size: 15px;
+  color: rgba(244,241,232,0.6);
+  margin: 0 0 24px;
+  letter-spacing: 0.5px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(244,241,232,0.55);
+}
+
+input, select {
+  background: var(--pitch-light);
+  border: 1px solid rgba(255,182,39,0.2);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--chalk);
+  font-family: 'Space Mono', monospace;
+  font-size: 15px;
+  width: 100%;
+}
+
+input::placeholder { color: rgba(244,241,232,0.3); }
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(255,182,39,0.15);
+}
+
+select option { background: var(--pitch); color: var(--chalk); }
+
+button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  background: var(--amber);
+  color: var(--shadow);
+  border: none;
+  border-radius: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255,182,39,0.35);
+}
+
+button:active { transform: translateY(0); }
+
+.result {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px dashed rgba(255,182,39,0.25);
+  text-align: center;
+  animation: flicker-in 0.5s ease-out;
+}
+
+.result-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(244,241,232,0.5);
+}
+
+.result h2 {
+  font-family: 'Space Mono', monospace;
+  color: var(--amber);
+  text-shadow: 0 0 14px rgba(255,182,39,0.5);
+  font-size: 22px;
+  margin: 8px 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.proba-track {
+  width: 100%;
+  height: 8px;
+  background: var(--shadow);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.proba-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--live), var(--amber));
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.proba-value {
+  display: block;
+  margin-top: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 15px;
+  color: var(--chalk);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes flicker-in {
+  0% { opacity: 0; transform: translateY(4px); }
+  60% { opacity: 0.7; }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 420px) {
+  .row { flex-direction: column; gap: 14px; }
+  h1 { font-size: 21px; letter-spacing: 2px; }
+}
