@@ -211,3 +211,11 @@ button:active { transform: translateY(0); }
   .row { flex-direction: column; gap: 14px; }
   h1 { font-size: 21px; letter-spacing: 2px; }
 }
+
+.result.error {
+  border-top-color: rgba(255, 90, 90, 0.35);
+}
+.result.error h2 {
+  color: #FF6B6B;
+  text-shadow: 0 0 14px rgba(255, 107, 107, 0.5);
+}
