@@ -26,33 +26,33 @@
         <div class="field">
           <label for="batting_team">Batting</label>
           <select id="batting_team" name="batting_team" required>
-            <option value="" disabled selected>Select team</option>
-            <option value="RCB">RCB</option>
-            <option value="CSK">CSK</option>
-            <option value="MI">MI</option>
-            <option value="KKR">KKR</option>
-            <option value="RR">RR</option>
-            <option value="GT">GT</option>
-            <option value="PBKS">PBKS</option>
-            <option value="SRH">SRH</option>
-            <option value="DC">DC</option>
-            <option value="LSG">LSG</option>
+            <option value="" disabled {% if not request.form.get('batting_team') %}selected{% endif %}>Select team</option>
+            <option value="RCB" {% if request.form.get('batting_team')=='RCB' %}selected{% endif %}>RCB</option>
+            <option value="CSK" {% if request.form.get('batting_team')=='CSK' %}selected{% endif %}>CSK</option>
+            <option value="MI" {% if request.form.get('batting_team')=='MI' %}selected{% endif %}>MI</option>
+            <option value="KKR" {% if request.form.get('batting_team')=='KKR' %}selected{% endif %}>KKR</option>
+            <option value="RR" {% if request.form.get('batting_team')=='RR' %}selected{% endif %}>RR</option>
+            <option value="GT" {% if request.form.get('batting_team')=='GT' %}selected{% endif %}>GT</option>
+            <option value="PBKS" {% if request.form.get('batting_team')=='PBKS' %}selected{% endif %}>PBKS</option>
+            <option value="SRH" {% if request.form.get('batting_team')=='SRH' %}selected{% endif %}>SRH</option>
+            <option value="DC" {% if request.form.get('batting_team')=='DC' %}selected{% endif %}>DC</option>
+            <option value="LSG" {% if request.form.get('batting_team')=='LSG' %}selected{% endif %}>LSG</option>
           </select>
         </div>
         <div class="field">
           <label for="bowling_team">Bowling</label>
           <select id="bowling_team" name="bowling_team" required>
-            <option value="" disabled selected>Select team</option>
-            <option value="RCB">RCB</option>
-            <option value="CSK">CSK</option>
-            <option value="MI">MI</option>
-            <option value="KKR">KKR</option>
-            <option value="RR">RR</option>
-            <option value="GT">GT</option>
-            <option value="PBKS">PBKS</option>
-            <option value="SRH">SRH</option>
-            <option value="DC">DC</option>
-            <option value="LSG">LSG</option>
+            <option value="" disabled {% if not request.form.get('bowling_team') %}selected{% endif %}>Select team</option>
+            <option value="RCB" {% if request.form.get('bowling_team')=='RCB' %}selected{% endif %}>RCB</option>
+            <option value="CSK" {% if request.form.get('bowling_team')=='CSK' %}selected{% endif %}>CSK</option>
+            <option value="MI" {% if request.form.get('bowling_team')=='MI' %}selected{% endif %}>MI</option>
+            <option value="KKR" {% if request.form.get('bowling_team')=='KKR' %}selected{% endif %}>KKR</option>
+            <option value="RR" {% if request.form.get('bowling_team')=='RR' %}selected{% endif %}>RR</option>
+            <option value="GT" {% if request.form.get('bowling_team')=='GT' %}selected{% endif %}>GT</option>
+            <option value="PBKS" {% if request.form.get('bowling_team')=='PBKS' %}selected{% endif %}>PBKS</option>
+            <option value="SRH" {% if request.form.get('bowling_team')=='SRH' %}selected{% endif %}>SRH</option>
+            <option value="DC" {% if request.form.get('bowling_team')=='DC' %}selected{% endif %}>DC</option>
+            <option value="LSG" {% if request.form.get('bowling_team')=='LSG' %}selected{% endif %}>LSG</option>
           </select>
         </div>
       </div>
@@ -60,33 +60,35 @@
       <div class="row">
         <div class="field">
           <label for="target">Target</label>
-          <input type="number" id="target" name="target" placeholder="0" min="0" max="320" required>
+          <input type="number" id="target" name="target" placeholder="0" min="0" max="320" value="{{ request.form.get('target', '') }}" required>
         </div>
         <div class="field">
           <label for="curr_run">Current Score</label>
-          <input type="number" id="curr_run" name="curr_run" placeholder="0" min="0" max="319" required>
+          <input type="number" id="curr_run" name="curr_run" placeholder="0" min="0" max="319" value="{{ request.form.get('curr_run', '') }}" required>
         </div>
       </div>
 
       <div class="row">
         <div class="field">
           <label for="ball_number">Balls Bowled</label>
-          <input type="number" id="ball_number" name="ball_number" placeholder="0" min="6" max="119" required>
+          <input type="number" id="ball_number" name="ball_number" placeholder="0" min="6" max="119" value="{{ request.form.get('ball_number', '') }}" required>
         </div>
         <div class="field">
           <label for="curr_wick">Wickets Fallen</label>
-          <input type="number" id="curr_wick" name="curr_wick" placeholder="0" min="0" max="9" required>
+          <input type="number" id="curr_wick" name="curr_wick" placeholder="0" min="0" max="9" value="{{ request.form.get('curr_wick', '') }}" required>
         </div>
       </div>
 
       <button type="submit">PREDICT</button>
     </form>
+
     {% if error %}
     <section class="result error">
-       <span class="result-label">Error</span>
-       <h2>{{ error }}</h2>
+      <span class="result-label">Error</span>
+      <h2>{{ error }}</h2>
     </section>
     {% endif %}
+
     {% if prediction %}
     <section class="result">
       <span class="result-label">Verdict</span>
@@ -101,4 +103,4 @@
 </main>
 
 </body>
-</html>
+  </html>
