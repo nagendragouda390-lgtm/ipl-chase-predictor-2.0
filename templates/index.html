@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Chase Predictor</title>
+</head>
+<body>
+
+<div class="floodlights"></div>
+
+<main class="board">
+  <div class="board-frame">
+    <header class="board-header">
+      <span class="dot"></span>
+      <h1>CHASE PREDICTOR</h1>
+      <span class="dot"></span>
+    </header>
+    <p class="byline">Nagendra &middot; BCA Student &middot; Building toward AI/ML Engineering</p>
+
+    <form action="/predict" method="POST">
+      <div class="row">
+        <div class="field">
+          <label for="batting_team">Batting</label>
+          <select id="batting_team" name="batting_team" required>
+            <option value="" disabled selected>Select team</option>
+            <option value="RCB">RCB</option>
+            <option value="CSK">CSK</option>
+            <option value="MI">MI</option>
+            <option value="KKR">KKR</option>
+            <option value="RR">RR</option>
+            <option value="GT">GT</option>
+            <option value="PBKS">PBKS</option>
+            <option value="SRH">SRH</option>
+            <option value="DC">DC</option>
+            <option value="LSG">LSG</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bowling_team">Bowling</label>
+          <select id="bowling_team" name="bowling_team" required>
+            <option value="" disabled selected>Select team</option>
+            <option value="RCB">RCB</option>
+            <option value="CSK">CSK</option>
+            <option value="MI">MI</option>
+            <option value="KKR">KKR</option>
+            <option value="RR">RR</option>
+            <option value="GT">GT</option>
+            <option value="PBKS">PBKS</option>
+            <option value="SRH">SRH</option>
+            <option value="DC">DC</option>
+            <option value="LSG">LSG</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="target">Target</label>
+          <input type="number" id="target" name="target" placeholder="0" min="0" max="320" required>
+        </div>
+        <div class="field">
+          <label for="curr_run">Current Score</label>
+          <input type="number" id="curr_run" name="curr_run" placeholder="0" min="0" max="319" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="ball_number">Balls Bowled</label>
+          <input type="number" id="ball_number" name="ball_number" placeholder="0" min="6" max="119" required>
+        </div>
+        <div class="field">
+          <label for="curr_wick">Wickets Fallen</label>
+          <input type="number" id="curr_wick" name="curr_wick" placeholder="0" min="0" max="9" required>
+        </div>
+      </div>
+
+      <button type="submit">PREDICT</button>
+    </form>
+
+    {% if prediction %}
+    <section class="result">
+      <span class="result-label">Verdict</span>
+      <h2>{{ prediction }}</h2>
+      <div class="proba-track">
+        <div class="proba-fill" style="width: {{ proba }}%;"></div>
+      </div>
+      <span class="proba-value">{{ proba }}% win probability</span>
+    </section>
+    {% endif %}
+  </div>
+</main>
+
+</body>
+</html>
