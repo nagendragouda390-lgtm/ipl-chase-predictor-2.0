@@ -22,7 +22,7 @@ TEAM_MAP = {
 }
 
 try:
-    pipe = joblib.load('pipeline.pkl')
+    pipe = joblib.load('pipelin3e.pkl')
 except FileNotFoundError:
     logging.error("pipeline.pkl not found. Place it in the app's root directory.")
     pipe = None
