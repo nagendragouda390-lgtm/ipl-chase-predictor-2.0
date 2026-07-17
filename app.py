@@ -109,6 +109,9 @@ def predict():
 
         if probability > 0.75:
             result = "easy chase for batting team"
+        elif data["rr"] > 36:
+            result = "easy win for bowling team"
+            probability = 0.01
         elif probability > 0.55:
             result = "close but chasable"
         elif probability > 0.25:
